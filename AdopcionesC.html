@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopciones - Patitas en el Corazón</title>
+    <link rel="stylesheet" href="css/adopciones.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .sidebar a:hover { background-color: #f3eeed; }
+        .sidebar a.active { background-color: #3B82F6; }
+    </style>
+</head>
+<body class="flex h-screen bg-gray-100">
+<!-- Menú lateral -->
+<aside class="sidebar w-64 bg-[#fdf6ec] text-gray-800 fixed h-full overflow-y-auto">
+    <nav class="p-4">
+        <ul class="space-y-2">
+            <li><a href="index.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐾</span> Inicio</a></li>
+            <li><a href="adopciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐕</span> Adopciones</a></li>
+            <li><a href="eventos.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🗓️</span> Eventos</a></li>
+            <li><a href="Donaciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">💰</span> Donaciones</a></li>
+            <li><a href="reportes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">📄</span> Reportes</a></li>
+            <li><a href="usuarios.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Usuarios</a></li>
+ <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Juguetes</a></li>
+            <!-- Espacio para ajustes y cerrar sesión (alineado al final) -->
+            <div class="absolute bottom-0 w-full left-0 p-4">
+                <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
+                <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-700"><span class="mr-2">🚪</span> Cerrar sesión</li>
+            </div>
+        </ul>
+    </nav>
+</aside>
+
+<!-- Contenido principal -->
+<main class="flex-1 ml-64 p-8 overflow-y-auto" id="content">
+
+    <!-- Tu contenido aquí -->
+
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">
+            <img src="CSS/images/logo.jpg" alt="Adopciones">
+        </div>
+        <h2>Adopciones 🐾</h2>
+        <div class="perfil">
+            <span>Nicola Rich</span>
+            <img src="CSS/images/perfil.png" alt="Perfil">
+        </div>
+    </header>
+
+    <!-- Sección Principal -->
+    <section class="text-center my-12">
+        <div class="flex justify-center items-center gap-6 py-8">
+            <a href="adopciones.html" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition duration-300">
+                🐶 Perros
+            </a>
+            <span class="text-2xl font-bold">y</span>
+            <a href="AdopcionesC.html" class="text-2xl font-bold text-pink-600 hover:text-pink-800 transition duration-300">
+                🐱 Gatos
+            </a>
+            <!-- Imagen de gatito -->
+
+        </div>
+    <h1 class="text-4xl font-bold text-center mb-4 ">Dales Una Oportunidad</h1>
+    <h3 class="text-2xl text-center mb-8 text-gray-700">Adoptar un gato: ternura y compañía inigualables</h3>
+    <p class="text-center mb-12 text-gray-600">
+        Adoptar un gato no solo transforma su vida, sino también la tuya. Estos pequeños compañeros ofrecen amor,
+        independencia y momentos de juego inigualables. Adoptar reduce la cantidad de gatos en situación de calle
+        y da una nueva oportunidad a seres que solo buscan un hogar lleno de cariño. 🐾💕
+    </p>
+    </section>
+    <!-- Sección de Gatos en Adopción -->
+    <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+        <!-- Gatito 1 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Milo', 'Milo es un gatito juguetón de pelaje anaranjado. Le encanta trepar y dormir en lugares altos. Es curioso, cariñoso y muy sociable', 'https://placecats.com/louie/300/200')">
+            <img src="https://placecats.com/louie/300/200" alt="Milo" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-pink-600">Milo</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 2 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Nina', 'Nina es una gatita elegante de pelaje gris. Tranquila, observadora y muy cariñosa. Ideal para hogares que buscan calma y ternura.', 'https://placecats.com/millie/300/150')">
+
+        <img src="https://placecats.com/millie/300/150" alt="Nina" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-yellow-600">Nina</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 3 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Leo', 'LLeo es un pequeño aventurero de ojos grandes y brillantes. Siempre busca jugar y explorar nuevos rincones. ¡Un compañero lleno de energía!', 'https://placecats.com/neo_banana/300/200')">
+
+        <img src="https://placecats.com/neo_banana/300/200" alt="Leo" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-green-700">Leo</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 4 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Mía', 'Mía es una gatita dulce de pelaje blanco. Le encanta acurrucarse en tu regazo y recibir mimos. Ideal para familias que buscan amor incondicional.', 'https://placecats.com/bella/300/200')">
+
+            <img src="https://placecats.com/bella/300/200" alt="Mía" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-blue-700">Mía</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+        <!-- Gatito 5 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Simba', 'Simba siempre está explorando y buscando nuevas aventuras. Perfecto para hogares dinámicos.', 'https://placecats.com/neo/300/200')">
+            <img src="https://placecats.com/neo/300/200" alt="Simba" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-pink-600">Simba</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 6 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Luna', 'Luna disfruta de largas siestas al sol y noches de contemplación en la ventana.', 'https://placecats.com/poppy/300/150')">
+            <img src="https://placecats.com/poppy/300/150" alt="Luna" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-yellow-600">Luna</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 7 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Max', 'Max te sacará sonrisas con sus travesuras y su energía interminable.', 'https://placecats.com/millie_neo/300/200')">
+            <img src="https://placecats.com/millie_neo/300/200" alt="Max" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-green-700">Max</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 8 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Nala', 'Nala buscará tu regazo apenas te sientes. Ideal para personas que adoran mimar a sus mascotas.', 'https://placecats.com/neo_banana/300/200')">
+            <img src="https://placecats.com/neo_banana/300/200" alt="Nala" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-purple-600">Nala</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 9 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Oliver', 'Oliver siempre investiga todo a su alrededor. Es muy inteligente y aprende rápido.', 'https://placecats.com/neo_2/300/200')">
+            <img src="https://placecats.com/neo_2/300/200" alt="Oliver" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-red-600">Oliver</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 10 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Cleo', 'Cleo ama jugar con cordones y pelotas. Siempre lista para una nueva aventura.', 'https://placecats.com/bella/300/200')">
+            <img src="https://placecats.com/bella/300/200" alt="Cleo" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-yellow-600">Cleo</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 11 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Chester', 'Chester es el compañero perfecto para las tardes frías. Le encanta dormir en lugares cálidos.', 'https://placecats.com/g/300/200')">
+            <img src="https://placecats.com/g/300/200" alt="Chester" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-semibold text-gray-800">Chester</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+        <!-- Gatito 12 -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 cursor-pointer" onclick="openModal('Milo', 'Milo adora descubrir nuevos rincones de la casa y treparse a todas partes.', 'https://placecats.com/300/200')">
+            <img src="https://placecats.com/300/200" alt="Milo" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2 text-yellow-600">Milo</h3>
+                <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            <img id="modalImage" src="" alt="Foto del perrito" class="w-full h-48 object-cover rounded-lg mb-4">
+            <h2 id="modalTitle" class="text-2xl font-bold mb-2"></h2>
+            <p id="modalDescription" class="text-gray-600 mb-4"></p>
+            <a href="formulario-adopcion.html" class="bg-[#E07B75] text-white font-semibold py-2 px-4 rounded hover:bg-[#d06a64]">
+                Adoptar
+            </a>
+            <a href="carrito.html" class="bg-[#E07B75] text-white font-semibold py-2 px-4 rounded hover:bg-[#d06a64] mt-10 ml-8">
+    Comprar
+</a>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>Patitas en el Corazón</p>
+        <div class="footer-links">
+            <a href="#">Acerca</a>
+            <a href="#">Autores</a>
+            <a href="#">Archivo</a>
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de cookies</a>
+        </div>
+        <div class="social-icons">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </footer>
+</main>
+    <script>
+        function cerrarSesion() {
+          // Aquí puedes borrar sessionStorage si estás usando uno
+          // sessionStorage.clear();
+    
+          // Redirige a la página de inicio
+          window.location.href = "index.html"; // O "index.html", según el nombre real de tu pantalla de inicio
+        }
+    </script>
+<!-- Script para abrir/cerrar modal -->
+<script>
+    function openModal(name, description, image) {
+        document.getElementById('modalTitle').innerText = name;
+        document.getElementById('modalDescription').innerText = description;
+        document.getElementById('modalImage').src = image;
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patitas en el Corazón</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+<body class="bg-[#FFF2E5]">
+  <nav class="flex justify-center space-x-4 p-6 bg-[#E07B75] text-white font-semibold text-lg">
+    <a href="index.html">🐾Inicio</a>
+    <a href="adopciones.html">🐕Adopciones</a>
+    <a href="eventos.html">🗓️Eventos</a>
+    <a href="Donaciones.html">💰Donaciones</a>
+    <a href="reportes.html">📄Reportes</a>
+    <a href="usuarios.html">👨‍👩‍👧‍👦Usuarios</a>
+    <a href="carrito.html">🛒Carrito</a>
+  </nav>
+
+  <div class="w-full max-w-6xl m-auto">
+    <h1 class="text-[#D44D61] font-bold text-center text-5xl p-10">Juguetes🐾🐶🥎😺🐁</h1>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 p-8">
+      <div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/frisby.webp" alt="Frisby color azul" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Frisby color azul</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $15,000</p>
+        <button onclick="agregarAlCarrito('Frisby color azul', 15000, 'CSS/images/frisby.webp')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+
+      <div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/pelota de goma.jpeg" alt="Ratón de Felpa" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Pelota de Hueso</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $12,000</p>
+        <button onclick="agregarAlCarrito('Pelota de Hueso', 12000, 'CSS/images/pelota de goma.jpeg')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+
+      <div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/pato de goma.webp" alt="Hueso de Goma" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Pato de Goma</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $18,000</p>
+        <button onclick="agregarAlCarrito('Hueso de Goma', 18000, 'CSS/images/pato de goma.webp')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+
+      <div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/felpa.png" alt="Hueso de Goma" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Raton de felpa</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $9,000</p>
+        <button onclick="agregarAlCarrito('Raton de felpa', 9000, 'CSS/images/felpa.png')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+
+<div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/pelotas de lana.jpeg" alt="Hueso de Goma" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Pelota de lana</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $6,000</p>
+        <button onclick="agregarAlCarrito('Pelota de lana', 6000, 'CSS/images/pelotas de lana.jpeg')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+
+      <div class="bg-white rounded shadow-lg p-4">
+        <img src="CSS/images/lazer.jpeg" alt="Cuerda Trenzada" />
+        <h2 class="font-semibold text-xl text-[#D44D61] text-center mt-2">Lazer para gatos</h2>
+        <p class="text-center text-[#8E454A] font-semibold">Precio: $23,000</p>
+        <button onclick="agregarAlCarrito('Lazer para gatos', 23000, 'CSS/images/lazer.jpeg')" class="bg-[#E07B75] mt-2 text-white px-4 py-2 rounded hover:bg-[#d06a64] w-full">Comprar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function agregarAlCarrito(nombre, precio, imagen) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+      const productoExistente = carrito.find(item => item.nombre === nombre);
+
+      if (productoExistente) {
+        productoExistente.cantidad += 1;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1, imagen });
+      }
+
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(`${nombre} agregado al carrito.`);
+    }
+  </script>
+</body>
+</html>

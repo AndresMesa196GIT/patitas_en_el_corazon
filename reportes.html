@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes - Patitas en el Corazón</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/adopciones.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .sidebar a:hover { background-color: #f3eeed; }
+        .sidebar a.active { background-color: #3B82F6; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body class="flex h-screen bg-gray-100">
+<!-- Menú lateral -->
+<aside class="sidebar w-64 bg-[#fdf6ec] text-gray-800 fixed h-full overflow-y-auto">
+    <nav class="p-4">
+        <ul class="space-y-2">
+            <li><a href="index.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐾</span> Inicio</a></li>
+            <li><a href="adopciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐕</span> Adopciones</a></li>
+            <li><a href="eventos.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🗓️</span> Eventos</a></li>
+            <li><a href="Donaciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">💰</span> Donaciones</a></li>
+            <li><a href="reportes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">📄</span> Reportes</a></li>
+            <li><a href="usuarios.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Usuarios</a></li>
+ <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Juguetes</a></li>
+            <!-- Espacio para ajustes y cerrar sesión (alineado al final) -->
+            <div class="absolute bottom-0 w-full left-0 p-4">
+                <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
+                <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-700"><span class="mr-2">🚪</span> Cerrar sesión</li>
+            </div>
+        </ul>
+    </nav>
+</aside>
+
+
+<!-- Contenido principal -->
+<main class="flex-1 flex flex-col ml-64 min-h-screen" id="content">
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">
+            <img src="CSS/images/logo.jpg" alt=Adopciones">
+        </div>
+        <h2>Reportes 🐾</h2>
+        <div class="perfil">
+            <span>Nicola Rich</span>
+            <img src="CSS/images/perfil.png" alt="Perfil">
+        </div>
+    </header>
+
+    <!-- Contenido -->
+    <section class="flex-1 p-8 space-y-8">
+        <!-- Cuidadores -->
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Cuidadores de la semana</h2>
+        <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                <img src="CSS/images/pexels-simon-robben-55958-614810.jpg" alt="Andrés" class="w-16 h-16 rounded-full">
+                <p class="text-lg font-medium text-gray-700">Andrés</p>
+            </div>
+            <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                <img src="CSS/images/pexels-olly-774909.jpg" alt="Laura" class="w-16 h-16 rounded-full">
+                <p class="text-lg font-medium text-gray-700">Laura</p>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="mt-12 max-w-4xl mx-auto space-y-8">
+            <h2 class="text-2xl font-semibold text-center text-gray-800">Estadísticas del Mes</h2>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <canvas id="adopcionesPorMes" class="w-full"></canvas>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <canvas id="tiposMascotas" class="w-full"></canvas>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Mascotas Adoptadas de la semana</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                    <img src="CSS/images/pexels-pixabay-220938.jpg" alt="Lolo" class="w-16 h-16 rounded-full">
+                    <p class="text-lg font-medium text-gray-700">Lolo</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                    <img src="CSS/images/star.jpg" alt="Star" class="w-16 h-16 rounded-full">
+                    <p class="text-lg font-medium text-gray-700">Star</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                    <img src="CSS/images/pexels-irina-zhur-5306735-9862786.jpg" alt="Kuma" class="w-16 h-16 rounded-full">
+                    <p class="text-lg font-medium text-gray-700">Kuma</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                    <img src="CSS/images/rocky.jpg" alt="Rocky" class="w-16 h-16 rounded-full">
+                    <p class="text-lg font-medium text-gray-700">Rocky</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow p-4 flex items-center gap-4">
+                    <img src="CSS/images/santy.jpg" alt="Santy" class="w-16 h-16 rounded-full">
+                    <p class="text-lg font-medium text-gray-700">Santy</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Comentarios de Clientes</h2>
+            <div class="bg-white max-w-3xl mx-auto rounded-lg shadow p-6 space-y-4">
+                <p><span class="text-gray-500 mr-2">👤</span>Me encanta esta página, tiene muchas opciones para adoptar y las historias son hermosas.</p>
+                <p><span class="text-gray-500 mr-2">👤</span>Es increíble ver tantos animalitos en busca de un hogar, la información es clara.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>Patitas en el Corazón</p>
+        <div class="footer-links">
+            <a href="#">Acerca</a>
+            <a href="#">Autores</a>
+            <a href="#">Archivo</a>
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de cookies</a>
+        </div>
+        <div class="social-icons">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </footer>
+</main>
+
+<script>
+    // Adopciones por mes (simulado)
+    const ctx1 = document.getElementById('adopcionesPorMes').getContext('2d');
+    const chart1 = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+            datasets: [{
+                label: 'Adopciones por mes',
+                data: [12, 19, 15, 22, 17, 25],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            }
+        }
+    });
+
+    // Tipos de mascotas adoptadas
+    const ctx2 = document.getElementById('tiposMascotas').getContext('2d');
+    const chart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Perros', 'Gatos', 'Otros'],
+            datasets: [{
+                label: 'Tipos de Mascotas Adoptadas',
+                data: [60, 30, 10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+</script>
+<script>
+    function cerrarSesion() {
+      // Aquí puedes borrar datos de sesión si es necesario
+      window.location.href = "index.html"; // Redirige a la página de inicio
+    }
+</script>
+  
+</body>
+</html>

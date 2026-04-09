@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrito de Compras - Patitas en el Corazón</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#FFF2E5] min-h-screen flex flex-col items-center p-8">
+
+  <h1 class="text-3xl font-bold mb-8 text-[#D44D61]">Tu Carrito de Compras</h1>
+
+  <div id="carrito" class="w-full max-w-4xl bg-white rounded shadow p-6">
+    <!-- Productos cargados aquí -->
+  </div>
+
+  <div class="mt-6 w-full max-w-4xl flex justify-between items-center space-x-4">
+    <button onclick="vaciarCarrito()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Vaciar Carrito</button>
+
+    <button onclick="window.location.href='juguetes.html'" class="bg-[#E07B75] text-white px-4 py-2 rounded hover:bg-[#d06a64]">
+      Volver a Juguetes
+    </button>
+
+    <button onclick="realizarCompra()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      Realizar Compra
+    </button>
+
+    <div class="text-xl font-semibold space-x-6">
+      <span>Total: $<span id="total">0</span></span>
+      <span>Artículos: <span id="cantidad-total">0</span></span>
+    </div>
+  </div>
+
+  <script>
+    function cargarCarrito() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      const contenedor = document.getElementById('carrito');
+      contenedor.innerHTML = '';
+
+      if (carrito.length === 0) {
+        contenedor.innerHTML = '<p class="text-center text-gray-600">Tu carrito está vacío.</p>';
+        document.getElementById('total').textContent = '0';
+        document.getElementById('cantidad-total').textContent = '0';
+        return;
+      }
+
+      let total = 0;
+      let cantidadTotal = 0;
+
+      carrito.forEach((item, index) => {
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+        cantidadTotal += item.cantidad;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex justify-between items-center border-b py-4';
+
+        itemDiv.innerHTML = `
+          <div class="flex items-center space-x-4">
+            <img src="${item.imagen}" alt="${item.nombre}" class="w-20 h-20 object-cover rounded" />
+            <div>
+              <h3 class="font-semibold text-[#D44D61]">${item.nombre}</h3>
+              <p>Cantidad: 
+                <button onclick="cambiarCantidad(${index}, -1)" class="bg-gray-200 px-2 rounded hover:bg-gray-300">-</button>
+                <span class="px-2">${item.cantidad}</span>
+                <button onclick="cambiarCantidad(${index}, 1)" class="bg-gray-200 px-2 rounded hover:bg-gray-300">+</button>
+              </p>
+            </div>
+          </div>
+          <div>
+            <p>$${subtotal}</p>
+            <button onclick="eliminarProducto(${index})" class="text-red-500 hover:text-red-700">Eliminar</button>
+          </div>
+        `;
+
+        contenedor.appendChild(itemDiv);
+      });
+
+      document.getElementById('total').textContent = total.toFixed(2);
+      document.getElementById('cantidad-total').textContent = cantidadTotal;
+    }
+
+    function cambiarCantidad(index, cambio) {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito[index].cantidad += cambio;
+
+      if (carrito[index].cantidad < 1) {
+        carrito.splice(index, 1);
+      }
+
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      cargarCarrito();
+    }
+
+    function eliminarProducto(index) {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      cargarCarrito();
+    }
+
+    function vaciarCarrito() {
+      if (confirm('¿Seguro que quieres vaciar el carrito?')) {
+        localStorage.removeItem('carrito');
+        cargarCarrito();
+      }
+    }
+
+    function realizarCompra() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      if (carrito.length === 0) {
+        alert('Tu carrito está vacío. Agrega productos antes de comprar.');
+        return;
+      }
+      alert('¡Compra realizada con éxito! Gracias por tu compra.');
+      localStorage.removeItem('carrito');
+      cargarCarrito();
+    }
+
+    window.onload = cargarCarrito;
+  </script>
+
+</body>
+</html>
