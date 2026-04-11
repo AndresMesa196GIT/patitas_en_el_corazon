@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favoritos - Patitas en el Corazón</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-gray-100">
+
+  <!-- Menú lateral -->
+  <aside class="sidebar w-64 bg-[#fdf6ec] text-gray-800 fixed h-full overflow-y-auto">
+    <nav class="p-4">
+      <ul class="space-y-2">
+        <li><a href="index.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐾</span> Inicio</a></li>
+        <li><a href="adopciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🐕</span> Adopciones</a></li>
+        <li><a href="eventos.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🗓️</span> Eventos</a></li>
+        <li><a href="Donaciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">💰</span> Donaciones</a></li>
+        <li><a href="reportes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">📄</span> Reportes</a></li>
+        <li><a href="usuarios.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Usuarios</a></li>
+        <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🧸</span> Juguetes</a></li>
+        <li><a href="favoritos.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">❤️</span> Favoritos</a></li>
+
+        <div class="mt-10 p-4">
+          <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
+          <li onclick="window.location.href='index.html'" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-200">
+            <span class="mr-2">🚪</span> Cerrar sesión
+          </li>
+        </div>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Contenido -->
+  <main class="flex-1 ml-64 p-8 overflow-y-auto">
+    <h1 class="text-3xl font-bold mb-6">Mis favoritos ❤️</h1>
+    <div id="contenedor-favoritos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
+  </main>
+
+  <script src="CSS/js/favoritos.js"></script>
+  <script>
+    mostrarFavoritos();
+  </script>
+</body>
+</html>

@@ -24,12 +24,15 @@
             <li><a href="reportes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">📄</span> Reportes</a></li>
             <li><a href="usuarios.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Usuarios</a></li>
             <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Juguetes</a></li>
+            <li><a href="favoritos.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">❤️</span> Favoritos</a></li>
 
-            <!-- Espacio para ajustes y cerrar sesión (alineado al final) -->
-            <div class="absolute bottom-0 w-full left-0 p-4">
-                <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
-                <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-700"><span class="mr-2">🚪</span> Cerrar sesión</li>
-            </div>
+            <!-- Parte de abajo -->
+        <div class="mt-10 p-4">
+            <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
+            <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-700">
+            <span class="mr-2">🚪</span> Cerrar sesión
+            </li>
+        </div>
         </ul>
     </nav>
 </aside>
@@ -81,6 +84,9 @@
             <img src="https://placedog.net/400?id=1" alt="Pepo" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-blue-700">Pepo</h3>
             <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(1, 'Pepo', 'Perro', 'Pepo es un perro muy leal, juguetón y amoroso.', 'https://placedog.net/400?id=1')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+              </button>
         </div>
 
         <!-- Luna -->
@@ -88,6 +94,11 @@
             <img src="https://placedog.net/400?id=2" alt="Luna" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-pink-600">Luna</h3>
             <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            <button 
+            onclick="event.stopPropagation(); agregarFavorito(2, 'Luna', 'Perro', 'Luna es una pequeña traviesa y súper cariñosa.', 'https://placedog.net/400?id=2')"
+            class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+            ❤️ Favorito
+            </button>
         </div>
 
         <!-- Coco -->
@@ -95,6 +106,9 @@
             <img src="https://placedog.net/400?id=3" alt="Coco" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-yellow-600">Coco</h3>
             <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(3, 'Coco', 'Perro', 'Coco es curioso, travieso y muy divertido.', 'https://placedog.net/400?id=3')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Peter -->
@@ -102,6 +116,9 @@
             <img src="https://placedog.net/400?id=4" alt="Peter" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-green-700">Peter</h3>
             <p class="text-gray-600 text-sm">Haz clic para conocer más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(4, 'Peter', 'Perro', 'Peter es fuerte, leal y muy cariñoso.', 'https://placedog.net/400?id=4')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Pepo -->
@@ -109,6 +126,9 @@
             <img src="https://placedog.net/400?id=10" alt="Pepo" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-blue-700">Pepo</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(5, 'Pepo', 'Perro', 'Pepo es un criollo juguetón y protector, siempre atento y lleno de energía.', 'https://placedog.net/400?id=10')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Luna -->
@@ -116,6 +136,9 @@
             <img src="https://placedog.net/400?id=11" alt="Luna" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-pink-600">Luna</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(6, 'Luna', 'Perro', 'Luna es una criolla amorosa que adora los paseos y las caricias.', 'https://placedog.net/400?id=11')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Coco -->
@@ -123,6 +146,9 @@
             <img src="https://placedog.net/400?id=12" alt="Coco" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-yellow-600">Coco</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(7, 'Coco', 'Perro', 'Coco es muy sociable, le encanta correr y hacer nuevos amigos.', 'https://placedog.net/400?id=12')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Peter -->
@@ -130,6 +156,9 @@
             <img src="https://placedog.net/400?id=13" alt="Peter" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-green-700">Peter</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(8, 'Peter', 'Perro', 'Peter es grande y tierno, ideal para familias activas.', 'https://placedog.net/400?id=13')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Maya -->
@@ -137,6 +166,9 @@
             <img src="https://placedog.net/400?id=14" alt="Maya" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-purple-600">Maya</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(9, 'Maya', 'Perro', 'Maya es una criolla dulce, ideal para hogares tranquilos.', 'https://placedog.net/400?id=14')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
         <!-- Max -->
@@ -144,6 +176,9 @@
             <img src="https://placedog.net/400?id=15" alt="Max" class="w-full h-48 object-cover rounded-t-lg mb-4">
             <h3 class="text-xl font-bold mb-2 text-red-600">Max</h3>
             <p class="text-gray-600 text-sm">Haz clic para saber más.</p>
+            <button onclick="event.stopPropagation(); agregarFavorito(10, 'Max', 'Perro', 'Max es un cachorro activo que adora jugar al aire libre.', 'https://placedog.net/400?id=15')" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                ❤️ Favorito
+                </button>
         </div>
 
     </div>
@@ -221,5 +256,6 @@
         document.getElementById('modal').classList.add('hidden');
     }
 </script>
+<script src="CSS/js/favoritos.js"></script>
 </body>
 </html>
