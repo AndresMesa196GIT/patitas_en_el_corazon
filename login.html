@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión - Patitas en el Corazón</title>
     <link rel="stylesheet" href="css/login.css">
+    <style>
+        .error-msg {
+            color: #e53e3e;
+            font-size: 13px;
+            text-align: left;
+            width: 250px;
+        }
+        input.input-error {
+            border-color: #e53e3e !important;
+        }
+        .success-msg {
+            color: #38a169;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -14,12 +30,64 @@
         <div class="icon">
             <img src="CSS/images/pata_corazon.png" alt="Ícono de Huella en Corazón">
         </div>
-        <form>
-            <input type="text" placeholder="Usuario" required>
-            <input type="password" placeholder="Contraseña" required>
-            <a href="index.html" class="clase-de-tu-boton">Ingresar</a>
+        <form id="loginForm" novalidate>
+            <input type="text" id="usuario" placeholder="Usuario">
+            <span class="error-msg" id="error-usuario"></span>
+
+            <input type="password" id="password" placeholder="Contraseña">
+            <span class="error-msg" id="error-password"></span>
+
+            <span class="success-msg" id="msg-exito"></span>
+
+            <button type="submit" class="clase-de-tu-boton">Ingresar</button>
             <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
         </form>
     </div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valido = true;
+
+        const usuario = document.getElementById('usuario');
+        const password = document.getElementById('password');
+        const errUsuario = document.getElementById('error-usuario');
+        const errPassword = document.getElementById('error-password');
+        const msgExito = document.getElementById('msg-exito');
+
+        errUsuario.textContent = '';
+        errPassword.textContent = '';
+        msgExito.textContent = '';
+        usuario.classList.remove('input-error');
+        password.classList.remove('input-error');
+
+        if (usuario.value.trim() === '') {
+            errUsuario.textContent = '⚠ El usuario es obligatorio.';
+            usuario.classList.add('input-error');
+            valido = false;
+        } else if (usuario.value.trim().length < 3) {
+            errUsuario.textContent = '⚠ El usuario debe tener al menos 3 caracteres.';
+            usuario.classList.add('input-error');
+            valido = false;
+        }
+
+        if (password.value === '') {
+            errPassword.textContent = '⚠ La contraseña es obligatoria.';
+            password.classList.add('input-error');
+            valido = false;
+        } else if (password.value.length < 6) {
+            errPassword.textContent = '⚠ La contraseña debe tener al menos 6 caracteres.';
+            password.classList.add('input-error');
+            valido = false;
+        }
+
+        if (valido) {
+            msgExito.textContent = '✔ Iniciando sesión...';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+    });
+</script>
 </body>
 </html>
