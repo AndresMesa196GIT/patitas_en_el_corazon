@@ -5,17 +5,13 @@
     <title>Formulario de Adopción</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/adopciones.css">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .sidebar a:hover { background-color: #f3eeed; }
         .sidebar a.active { background-color: #3B82F6; }
-        .btn-rosado {
-            background-color: #E07B75; /* Color del botón basado en tu imagen */
-        }
-        .btn-rosado:hover {
-            background-color: #d06a64; /* Un tono un poco más oscuro al pasar el mouse */
-        }
+        .btn-rosado { background-color: #E07B75; }
+        .btn-rosado:hover { background-color: #d06a64; }
+        .error { color: red; font-size: 12px; }
     </style>
 </head>
 <body class="flex h-screen bg-gray-100">
@@ -29,91 +25,93 @@
             <li><a href="Donaciones.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">💰</span> Donaciones</a></li>
             <li><a href="reportes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">📄</span> Reportes</a></li>
             <li><a href="usuarios.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Usuarios</a></li>
- <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">👨‍👩‍👧‍👦</span> Juguetes</a></li>
-            <!-- Espacio para ajustes y cerrar sesión (alineado al final) -->
+            <li><a href="juguetes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">🧸</span> Juguetes</a></li>
             <div class="absolute bottom-0 w-full left-0 p-4">
                 <li><a href="ajustes.html" class="btn block p-3 rounded-lg flex items-center"><span class="mr-2">⚙️</span> Ajustes</a></li>
-                <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer hover:bg-gray-700"><span class="mr-2">🚪</span> Cerrar sesión</li>
+                <li onclick="cerrarSesion()" class="btn block p-3 rounded-lg flex items-center cursor-pointer"><span class="mr-2">🚪</span> Cerrar sesión</li>
             </div>
         </ul>
     </nav>
 </aside>
-<!-- Contenido principal -->
-<main class="flex-1 ml-64 p-8 overflow-y-auto" id="content">
-    <!-- Encabezado -->
+
+<main class="flex-1 ml-64 p-8 overflow-y-auto">
     <header>
-        <div class="logo">
-            <img src="CSS/images/logo.jpg" alt="Adopciones">
-        </div>
-        <h2>Formulario Adopaciones🐾</h2>
+        <div class="logo"><img src="CSS/images/logo.jpg" alt="Adopciones"></div>
+        <h2>Formulario Adopciones🐾</h2>
         <div class="perfil">
             <span>Nicola Rich</span>
             <img src="CSS/images/perfil.png" alt="Perfil">
         </div>
     </header>
 
-    <form action="#" method="POST" class="space-y-6">
+    <form id="formAdopcion" class="space-y-6">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Nombre completo</label>
-                <input type="text" name="nombre" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <input type="text" id="nombre" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                <span id="errorNombre" class="error"></span>
             </div>
-
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Documento de identidad</label>
-                <input type="text" name="documento" required placeholder="Ej: 12345678" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <input type="text" id="documento" placeholder="Ej: 12345678" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                <span id="errorDocumento" class="error"></span>
             </div>
-
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Edad</label>
-                <input type="number" name="edad" required min="18" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <input type="number" id="edad" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                <span id="errorEdad" class="error"></span>
             </div>
-
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Teléfono</label>
-                <input type="tel" name="telefono" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <input type="tel" id="telefono" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                <span id="errorTelefono" class="error"></span>
             </div>
         </div>
 
         <div>
             <label class="block text-gray-700 font-semibold mb-1">Correo electrónico</label>
-            <input type="email" name="correo" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+            <input type="email" id="correo" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            <span id="errorCorreo" class="error"></span>
         </div>
 
         <div>
             <label class="block text-gray-700 font-semibold mb-1">Dirección completa</label>
-            <input type="text" name="direccion" required placeholder="Calle, número, barrio, ciudad" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+            <input type="text" id="direccion" placeholder="Calle, número, barrio, ciudad" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            <span id="errorDireccion" class="error"></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">¿Tiene otras mascotas?</label>
-                <select name="otras_mascotas" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <select id="mascotas" class="w-full border border-gray-300 rounded-lg px-3 py-2">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                 </select>
+                <span id="errorMascotas" class="error"></span>
             </div>
-
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">¿Tiene espacio adecuado (patio)?</label>
-                <select name="espacio" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                <select id="espacio" class="w-full border border-gray-300 rounded-lg px-3 py-2">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                 </select>
+                <span id="errorEspacio" class="error"></span>
             </div>
         </div>
 
         <div>
-            <label class="block text-gray-700 font-semibold mb-1">Nombre del mascota que desea adoptar</label>
-            <input type="text" name="perro" required placeholder="Ej: Pepo, Luna, Coco" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+            <label class="block text-gray-700 font-semibold mb-1">Nombre de la mascota que desea adoptar</label>
+            <input type="text" id="mascota" placeholder="Ej: Pepo, Luna, Coco" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            <span id="errorMascota" class="error"></span>
         </div>
 
         <div>
             <label class="block text-gray-700 font-semibold mb-1">Compromiso de adopción</label>
-            <textarea name="compromiso" required rows="4" placeholder="Explica brevemente tu compromiso con el cuidado y bienestar del perrito." class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"></textarea>
+            <textarea id="compromiso" rows="4" placeholder="Explica brevemente tu compromiso." class="w-full border border-gray-300 rounded-lg px-3 py-2"></textarea>
+            <span id="errorCompromiso" class="error"></span>
         </div>
 
         <div class="text-center">
@@ -127,7 +125,7 @@
     <div class="mt-6 text-center">
         <a href="index.html" class="text-blue-500 hover:underline">← Volver al inicio</a>
     </div>
-    <!-- Pie de Página -->
+
     <footer>
         <p>Patitas en el Corazón</p>
         <div class="footer-links">
@@ -144,6 +142,109 @@
         </div>
     </footer>
 </main>
+
+<script>
+    document.getElementById('formAdopcion').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var valido = true;
+
+        // Limpiar todos los errores
+        document.querySelectorAll('.error').forEach(function(span) {
+            span.textContent = '';
+        });
+
+        // Nombre: obligatorio, sin números, mínimo 3 letras
+        var nombre = document.getElementById('nombre').value;
+        if (nombre == '') {
+            document.getElementById('errorNombre').textContent = 'Por favor escribe tu nombre completo';
+            valido = false;
+        } else if (nombre.length < 3) {
+            document.getElementById('errorNombre').textContent = ' Ups el nombre es muy corto';
+            valido = false;
+        } else if (/\d/.test(nombre)) {
+            document.getElementById('errorNombre').textContent = 'Tu nombre no puede tener números';
+            valido = false;
+        }
+
+        // Documento: solo números
+        var documento = document.getElementById('documento').value;
+        if (documento == '') {
+            document.getElementById('errorDocumento').textContent = 'El documento de la persona es necesario para poder continuar';
+            valido = false;
+        } else if (isNaN(documento)) {
+            document.getElementById('errorDocumento').textContent = 'El documento solo puede tener números';
+            valido = false;
+        }
+
+        // Edad: obligatoria y mayor de 18
+        var edad = document.getElementById('edad').value;
+        if (edad == '') {
+            document.getElementById('errorEdad').textContent = 'La edad es de la persona es necesario para poder continuar';
+            valido = false;
+        } else if (edad < 18) {
+            document.getElementById('errorEdad').textContent = 'Debes tener mas de 18 años para poder continuar';
+            valido = false;
+        }
+
+        // Teléfono: obligatorio y solo números
+        var telefono = document.getElementById('telefono').value;
+        if (telefono == '') {
+            document.getElementById('errorTelefono').textContent = 'Indique un numero de contacto';
+            valido = false;
+        } else if (isNaN(telefono)) {
+            document.getElementById('errorTelefono').textContent = 'El teléfono solo puede tener números no letras y signos';
+            valido = false;
+        }
+
+        // Correo: obligatorio y con @
+        var correo = document.getElementById('correo').value;
+        if (correo == '') {
+            document.getElementById('errorCorreo').textContent = 'Necesitamos un correo valido  para continuar';
+            valido = false;
+        } else if (!correo.includes('@')) {
+            document.getElementById('errorCorreo').textContent = 'Ups el Gmail no es válido';
+            valido = false;
+        }
+
+        // Dirección: obligatoria
+        if (document.getElementById('direccion').value == '') {
+            document.getElementById('errorDireccion').textContent = 'La dirección es necesaria para continuar';
+            valido = false;
+        }
+
+        // Selects obligatorios
+        if (document.getElementById('mascotas').value == '') {
+            document.getElementById('errorMascotas').textContent = 'Selecciona una opción entre (si O no)';
+            valido = false;
+        }
+
+        if (document.getElementById('espacio').value == '') {
+            document.getElementById('errorEspacio').textContent = 'Selecciona una opción entre (si O no)';
+            valido = false;
+        }
+
+        // Mascota: obligatoria
+        if (document.getElementById('mascota').value == '') {
+            document.getElementById('errorMascota').textContent = 'Indica la mascota que deseas adoptar';
+            valido = false;
+        }
+
+        // Compromiso: obligatorio
+        if (document.getElementById('compromiso').value == '') {
+            document.getElementById('errorCompromiso').textContent = 'Escribe tu compromiso con tu nueva mascota';
+            valido = false;
+        }
+
+        if (valido) {
+            alert('Solicitud enviada con éxito 🐾');
+            window.location.href = 'index.html';
+        }
+    });
+
+    function cerrarSesion() {
+        window.location.href = 'index.html';
+    }
+</script>
 
 </body>
 </html>
