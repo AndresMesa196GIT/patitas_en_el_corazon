@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Patitas en el Corazón</title>
     <link rel="stylesheet" href="css/registro.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
     <div class="registro-container">
@@ -14,12 +20,64 @@
         <div class="icon">
             <img src="CSS/images/pata_corazon.png" alt="Ícono de Huella en Corazón">
         </div>
-        <form>
-            <input type="email" placeholder="Correo" required>
-            <input type="text" placeholder="Nombre" required>
-            <input type="password" placeholder="Contraseña" required>
+        <form id="formRegistro">
+            <input type="email" id="correo" placeholder="Correo">
+            <span class="error" id="errorCorreo"></span>
+
+            <input type="text" id="nombre" placeholder="Nombre">
+            <span class="error" id="errorNombre"></span>
+
+            <input type="password" id="password" placeholder="Contraseña">
+            <span class="error" id="errorPassword"></span>
+
             <button type="submit">Registrarme</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('formRegistro').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var correo = document.getElementById('correo').value;
+            var nombre = document.getElementById('nombre').value;
+            var password = document.getElementById('password').value;
+            var valido = true;
+
+            // Limpiar errores
+            document.getElementById('errorCorreo').textContent = '';
+            document.getElementById('errorNombre').textContent = '';
+            document.getElementById('errorPassword').textContent = '';
+
+            // Validar correo
+            if (correo == '') {
+                document.getElementById('errorCorreo').textContent = 'El correo es obligatorio';
+                valido = false;
+            } else if (!correo.includes('@')) {
+                document.getElementById('errorCorreo').textContent = 'El correo debe tener @ y una letra em mayuscula';
+                valido = false;
+            }
+
+            // Validar nombre
+            if (nombre == '') {
+                document.getElementById('errorNombre').textContent = 'El  nombre  de  usuario  es  obligatorio';
+                valido = false;
+            }
+
+            // Validar contraseña
+            if (password == '') {
+                document.getElementById('errorPassword').textContent = 'La contraseña es obligatoria';
+                valido = false;
+            } else if (password.length < 6) {
+                document.getElementById('errorPassword').textContent = ' la contraseña debe de tenr  un mínimo  de 6 caracteres';
+                valido = false;
+            }
+
+            // Si todo está bien
+            if (valido) {
+                alert('Tu Registro  fue exitoso!');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 </html>
