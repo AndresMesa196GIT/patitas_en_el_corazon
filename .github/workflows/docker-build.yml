@@ -1,0 +1,21 @@
+name: Docker build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el codigo
+        uses: actions/checkout@v4
+
+      - name: Crear .env de prueba desde el ejemplo
+        run: cp .env.example .env
+
+      - name: Construir la imagen de la app
+        run: docker build -t patitas-app ./app
+
+      - name: Construir los servicios con Docker Compose
+        run: docker compose build

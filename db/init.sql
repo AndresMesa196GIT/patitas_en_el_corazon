@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS mascotas (
+  id SERIAL PRIMARY KEY,
+  nombre TEXT NOT NULL,
+  tipo TEXT NOT NULL,
+  edad INTEGER
+);
