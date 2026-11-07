@@ -257,5 +257,44 @@
     }
 </script>
 <script src="CSS/js/favoritos.js"></script>
+<!-- Pega esto dentro del <body> de adopciones.html -->
+<form id="form-mascota">
+  <input name="nombre" placeholder="Nombre" required>
+  <input name="tipo" placeholder="Tipo (perro, gato)" required>
+  <input name="edad" type="number" min="0" placeholder="Edad">
+  <button type="submit">Guardar</button>
+</form>
+
+<ul id="mascotas"></ul>
+
+<script>
+  async function cargar() {
+    const respuesta = await fetch("/api/mascotas");
+    const lista = await respuesta.json();
+    const ul = document.getElementById("mascotas");
+    ul.replaceChildren(
+      ...lista.map((m) => {
+        const li = document.createElement("li");
+        li.textContent = `${m.nombre} - ${m.tipo}`;
+        return li;
+      })
+    );
+  }
+
+  document.getElementById("form-mascota").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const datos = Object.fromEntries(new FormData(e.target));
+    await fetch("/api/mascotas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos),
+    });
+    e.target.reset();
+    cargar();
+  });
+
+  cargar();
+</script>
+
 </body>
 </html>
