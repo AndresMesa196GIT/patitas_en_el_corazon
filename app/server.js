@@ -49,4 +49,22 @@ app.post("/api/mascotas", async (req, res) => {
   }
 });
 
+// Borrar: app -> db -> app
+app.delete("/api/mascotas/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: "id inválido" });
+  }
+  try {
+    const { rowCount } = await pool.query("DELETE FROM mascotas WHERE id = $1", [id]);
+    if (rowCount === 0) {
+      return res.status(404).json({ error: "No existe esa mascota" });
+    }
+    res.status(204).end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "No se pudo borrar de la base de datos" });
+  }
+});
+
 app.listen(3000, () => console.log("App escuchando en el puerto 3000"));

@@ -258,42 +258,232 @@
 </script>
 <script src="CSS/js/favoritos.js"></script>
 <!-- Pega esto dentro del <body> de adopciones.html -->
-<form id="form-mascota">
-  <input name="nombre" placeholder="Nombre" required>
-  <input name="tipo" placeholder="Tipo (perro, gato)" required>
-  <input name="edad" type="number" min="0" placeholder="Edad">
-  <button type="submit">Guardar</button>
-</form>
+<!-- Panel de mascotas: guarda y lee desde la API (app -> db -> app) -->
+<style>
+  .pm-panel {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: min(320px, calc(100vw - 32px));
+    max-height: 70vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: #fff;
+    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    font-size: 14px;
+    z-index: 1000;
+  }
+  .pm-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .pm-titulo {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #c0504d;
+  }
+  .pm-toggle {
+    border: 0;
+    background: #f3f3f3;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .pm-form {
+    display: grid;
+    gap: 8px;
+  }
+  .pm-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .pm-form input,
+  .pm-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+  }
+  .pm-form input:focus,
+  .pm-form select:focus {
+    outline: 2px solid #f08080;
+    outline-offset: 0;
+    border-color: #f08080;
+  }
+  .pm-boton {
+    padding: 10px;
+    border: 0;
+    border-radius: 8px;
+    background: #f08080;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .pm-boton:hover {
+    background: #e66a6a;
+  }
+  .pm-estado {
+    min-height: 18px;
+    margin: 8px 0 0;
+    font-size: 13px;
+  }
+  .pm-estado.ok { color: #2e7d32; }
+  .pm-estado.error { color: #c62828; }
+  .pm-subtitulo {
+    margin: 10px 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+  }
+  .pm-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .pm-lista li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: #fff5f5;
+    border-radius: 8px;
+  }
+  .pm-emoji { font-size: 22px; }
+  .pm-nombre { display: block; font-weight: 700; }
+  .pm-detalle { display: block; font-size: 12px; color: #777; }
+  .pm-vacio { margin: 0; color: #888; font-size: 13px; }
+  .pm-minimizado .pm-form,
+  .pm-minimizado .pm-estado,
+  .pm-minimizado .pm-subtitulo,
+  .pm-minimizado .pm-lista,
+  .pm-minimizado .pm-vacio {
+    display: none;
+  }
+  .pm-minimizado .pm-cabecera { margin-bottom: 0; }
+</style>
 
-<ul id="mascotas"></ul>
+<section class="pm-panel" id="panel-mascotas">
+  <div class="pm-cabecera">
+    <h3 class="pm-titulo">🐾 Registrar mascota</h3>
+    <button type="button" class="pm-toggle" id="pm-toggle" aria-label="Minimizar panel">–</button>
+  </div>
+
+  <form id="form-mascota" class="pm-form">
+    <input name="nombre" placeholder="Nombre" required maxlength="60">
+    <div class="pm-fila">
+      <select name="tipo" required aria-label="Tipo">
+        <option value="perro">Perro</option>
+        <option value="gato">Gato</option>
+      </select>
+      <input name="edad" type="number" min="0" max="40" placeholder="Edad (años)">
+    </div>
+    <button type="submit" class="pm-boton">Guardar</button>
+  </form>
+
+  <p class="pm-estado" id="pm-estado" aria-live="polite"></p>
+
+  <p class="pm-subtitulo">Guardadas en la base de datos</p>
+  <ul class="pm-lista" id="mascotas"></ul>
+  <p class="pm-vacio" id="pm-vacio" hidden>Todavía no hay mascotas guardadas.</p>
+</section>
 
 <script>
-  async function cargar() {
-    const respuesta = await fetch("/api/mascotas");
-    const lista = await respuesta.json();
-    const ul = document.getElementById("mascotas");
-    ul.replaceChildren(
-      ...lista.map((m) => {
-        const li = document.createElement("li");
-        li.textContent = `${m.nombre} - ${m.tipo}`;
-        return li;
-      })
-    );
-  }
+  (function () {
+    const panel = document.getElementById("panel-mascotas");
+    const toggle = document.getElementById("pm-toggle");
+    const form = document.getElementById("form-mascota");
+    const lista = document.getElementById("mascotas");
+    const vacio = document.getElementById("pm-vacio");
+    const estado = document.getElementById("pm-estado");
 
-  document.getElementById("form-mascota").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const datos = Object.fromEntries(new FormData(e.target));
-    await fetch("/api/mascotas", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datos),
+    function mostrarEstado(texto, ok) {
+      estado.textContent = texto;
+      estado.className = "pm-estado " + (ok ? "ok" : "error");
+    }
+
+    function crear(etiqueta, clase, texto) {
+      const nodo = document.createElement(etiqueta);
+      if (clase) nodo.className = clase;
+      if (texto !== undefined) nodo.textContent = texto;
+      return nodo;
+    }
+
+    function textoEdad(edad) {
+      if (edad === null || edad === undefined) return "";
+      return edad === 1 ? " · 1 año" : " · " + edad + " años";
+    }
+
+    async function cargar() {
+      try {
+        const respuesta = await fetch("/api/mascotas");
+        if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+        const datos = await respuesta.json();
+
+        vacio.hidden = datos.length > 0;
+        lista.replaceChildren(
+          ...datos.slice().reverse().map((m) => {
+            const li = document.createElement("li");
+            const datosMascota = document.createElement("div");
+            datosMascota.append(
+              crear("span", "pm-nombre", m.nombre),
+              crear("span", "pm-detalle", m.tipo + textoEdad(m.edad))
+            );
+            li.append(crear("span", "pm-emoji", m.tipo === "gato" ? "🐱" : "🐶"), datosMascota);
+            return li;
+          })
+        );
+      } catch (err) {
+        mostrarEstado("No se pudo leer la lista.", false);
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const datos = Object.fromEntries(new FormData(form));
+      try {
+        const respuesta = await fetch("/api/mascotas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos),
+        });
+        if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+        const guardada = await respuesta.json();
+        form.reset();
+        mostrarEstado("Guardado: " + guardada.nombre, true);
+        cargar();
+      } catch (err) {
+        mostrarEstado("No se pudo guardar. Intenta de nuevo.", false);
+      }
     });
-    e.target.reset();
-    cargar();
-  });
 
-  cargar();
+    toggle.addEventListener("click", () => {
+      const minimizado = panel.classList.toggle("pm-minimizado");
+      toggle.textContent = minimizado ? "+" : "–";
+      toggle.setAttribute("aria-label", minimizado ? "Abrir panel" : "Minimizar panel");
+    });
+
+    cargar();
+  })();
+
+
+  
 </script>
 
 </body>
