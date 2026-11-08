@@ -14,6 +14,7 @@ const pool = new Pool({
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/css", express.static(path.join(__dirname, "public", "CSS")));
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
