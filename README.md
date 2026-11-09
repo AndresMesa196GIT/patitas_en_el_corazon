@@ -55,3 +55,8 @@ docker compose down -v     # apaga y borra el volumen
 
 - El archivo `.env` no se sube al repositorio. Solo se sube `.env.example`.
 - La base de datos no expone puertos al host; solo la app la alcanza por la red interna.
+
+## Créditos
+
+El sitio web estático parte del repositorio [AndresMantilla763/patitas_en_el_corazon](https://github.com/AndresMantilla763/patitas_en_el_corazon). 
+La contenerización, la API, la base de datos, Docker Compose y GitHub Actions son trabajo propio.
