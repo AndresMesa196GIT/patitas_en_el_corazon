@@ -5,6 +5,10 @@ pipeline {
         timestamps()
     }
 
+    environment {
+        COMPOSE_CI = 'docker compose -p ci -f docker-compose.yml -f docker-compose.ci.yml'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -20,10 +24,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Test') {
+            steps {
+                sh '$COMPOSE_CI up -d --build --wait'
+                sh 'sh tests/test_comunicacion.sh'
+            }
+        }
     }
 
     post {
         always {
+            sh '$COMPOSE_CI logs --tail=30 || true'
+            sh '$COMPOSE_CI down -v || true'
             sh 'rm -f .env'
         }
         success {

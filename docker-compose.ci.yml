@@ -1,0 +1,7 @@
+services:
+  app:
+    ports: !reset []
+
+networks:
+  patitas-net:
+    name: patitas-net-ci
